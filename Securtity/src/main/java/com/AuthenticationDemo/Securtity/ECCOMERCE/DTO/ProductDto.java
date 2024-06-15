@@ -11,6 +11,7 @@ public class ProductDto {
 
 
     @Getter
+    @Setter
     @Column(name = "ProductName")
     private String productName;
     @Setter
@@ -18,6 +19,7 @@ public class ProductDto {
     @Column(name = "description")
     private String description;
     @Getter
+    @Setter
     @Column(name = "ImageUrl")
     private String Image_Url;
     @Getter
@@ -26,10 +28,12 @@ public class ProductDto {
     private Long price;
 
     @Getter
+    @Setter
+    @Column(name = "categoryId")
     private Integer categoryId;
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long product_id;
+    private Long productId;
 
 
     public ProductDto() {
@@ -37,17 +41,11 @@ public class ProductDto {
     }
 
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
 
-    public void setImage_Url(String image_Url) {
-        Image_Url = image_Url;
-    }
 
-    public void setCategoryId(Integer categoryId) {
-        this.categoryId = categoryId;
-    }
+
+
+
 
 
 }

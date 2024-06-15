@@ -57,19 +57,19 @@ public class productController {
 
 
     }
-    @PutMapping("Update/id/{product_id}")
-    public ResponseEntity<ProductDto>editProduct(@RequestBody ProductDto productDto,@PathVariable Integer product_id)  {
+    @PutMapping("Update/id/{productId}")
+    public ResponseEntity<ProductDto>editProduct(@RequestBody ProductDto productDto,@PathVariable Integer productId)  {
         Optional<Category> optionalProduct = categoryRepository.findById(productDto.getCategoryId());
         if (optionalProduct.isPresent()){
-            productServices.updateProduct(productDto,product_id);
+            productServices.updateProduct(productDto,productId);
             return ResponseEntity.ok().body(productDto);
         }
         return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("Delete/{product_id}")
-    public String deleteProductByProductId(@PathVariable Integer product_id) {
-        productServices.deleteProductByproductId(product_id);
+    @DeleteMapping("Delete/{productId}")
+    public String deleteProductByProductId(@PathVariable Integer productId) {
+        productServices.deleteProductByproductId(productId);
         return "Product Deleted Sucessfully";
     }
 }

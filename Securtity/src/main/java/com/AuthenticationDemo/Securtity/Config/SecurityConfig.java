@@ -31,8 +31,10 @@ public class SecurityConfig {
         return http
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(req -> req
-                        .requestMatchers("/api/v1/auth/**").permitAll() // Allow authentication endpoint
+                        .requestMatchers("api/v1/auth/**").permitAll()
                         .requestMatchers("api/v1/Category/**").permitAll()
+                        .requestMatchers("/api/v4/mpesa/stkpush").permitAll()
+
                         .anyRequest().authenticated() // All other requests require authentication
                 )
                 .exceptionHandling(exception -> exception

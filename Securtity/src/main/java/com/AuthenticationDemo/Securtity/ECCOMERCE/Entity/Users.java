@@ -28,7 +28,8 @@ public class Users implements UserDetails {
     private String firstName;
     @Column(name = "LastName")
     private String lastName;
-    @Column(name = "Email")
+
+    @Column(name = "Email", unique = true)
     private String email;
     @Column(name = "Password")
     private String password;

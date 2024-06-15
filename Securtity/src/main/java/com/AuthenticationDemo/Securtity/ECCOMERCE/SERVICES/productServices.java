@@ -50,8 +50,8 @@ public class productServices {
 
     }
 
-    public void deleteProductByproductId(Integer product_id) {
-        productRepository.deleteById(product_id);
+    public void deleteProductByproductId(Integer productId) {
+        productRepository.deleteById(productId);
     }
 
 

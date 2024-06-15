@@ -2,6 +2,7 @@ package com.AuthenticationDemo.Securtity.ECCOMERCE.Entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,8 +13,9 @@ public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "product_id")
-    private Integer product_id;
+    @JsonProperty("productId")
+    @Column(name = "productId")
+    private Integer productId;
     @Setter
     @Getter
     @Column(name = "productName")
@@ -40,25 +42,24 @@ public class Product {
     public Product() {
     }
 
-    public Product(Integer product_id, String productName, String description, String image_Url, long price) {
-        this.product_id = product_id;
+    public Product(Integer productId, String productName, String description, String image_Url, long price, Category category) {
+        this.productId = productId;
         this.productName = productName;
         this.description = description;
         Image_Url = image_Url;
         Price = price;
+        this.category = category;
     }
 
     @Override
     public String toString() {
-        return "ProductModel{" +
-                "product_id=" + product_id +
-                ", productName=" + productName +
+        return "Product{" +
+                "productId=" + productId +
+                ", productName='" + productName + '\'' +
                 ", description='" + description + '\'' +
                 ", Image_Url='" + Image_Url + '\'' +
                 ", Price=" + Price +
+                ", category=" + category +
                 '}';
     }
-
-
-
 }

@@ -9,6 +9,8 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
+
+// this may act as A Dto for registering a user
 public class RegisterRequest {
     private String firstName;
     private String lastName;
