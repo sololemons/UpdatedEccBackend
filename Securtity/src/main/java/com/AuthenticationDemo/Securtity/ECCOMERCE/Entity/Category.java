@@ -18,7 +18,7 @@ public class Category {
     private int categoryId;
     @Setter
     @Getter
-    @Column(name = "name")
+    @Column(name = "categoryName")
     private String name;
     @Setter
     @Getter
@@ -32,7 +32,8 @@ public class Category {
     public Category() {
     }
 
-    public Category(String name, String description, String image_Url) {
+    public Category(int categoryId, String name, String description, String image_Url) {
+        this.categoryId = categoryId;
         this.name = name;
         this.description = description;
         this.image_Url = image_Url;
@@ -47,5 +48,4 @@ public class Category {
                 ", image_Url='" + image_Url + '\'' +
                 '}';
     }
-
 }

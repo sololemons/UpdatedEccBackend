@@ -11,10 +11,11 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("api/v1/Category")
-@CrossOrigin(origins = "http://localhost:5173")
+
 @RequiredArgsConstructor
 public class categoryController {
 
@@ -30,6 +31,12 @@ public class categoryController {
     @GetMapping("/get")
     public ResponseEntity<List<Category>> GetCategory() {
         return categoryServices.getAllCategories();
+    }
+
+    @GetMapping("/get{categoryId}")
+    public Optional<Category> getCategorybyId(@PathVariable Integer categoryId){
+
+        return categoryServices.getCategorybyId(categoryId);
     }
 
     @PostMapping("/add")

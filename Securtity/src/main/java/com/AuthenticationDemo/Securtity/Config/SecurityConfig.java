@@ -34,7 +34,8 @@ public class SecurityConfig {
                         .requestMatchers("api/v1/auth/**").permitAll()
                         .requestMatchers("api/v1/Category/**").permitAll()
                         .requestMatchers("/api/v4/mpesa/stkpush").permitAll()
-
+                        .requestMatchers("api/v4/mpesa/callback").permitAll()
+                        .requestMatchers("/api/v3/search").permitAll()
                         .anyRequest().authenticated() // All other requests require authentication
                 )
                 .exceptionHandling(exception -> exception

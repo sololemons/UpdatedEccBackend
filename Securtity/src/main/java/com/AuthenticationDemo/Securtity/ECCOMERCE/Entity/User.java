@@ -1,6 +1,5 @@
 package com.AuthenticationDemo.Securtity.ECCOMERCE.Entity;
 
-import com.AuthenticationDemo.Securtity.ECCOMERCE.Entity.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,11 +18,11 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "_Users")
-public class Users implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer Id;
+    private Integer userId;
     @Column(name = "FirstName")
     private String firstName;
     @Column(name = "LastName")

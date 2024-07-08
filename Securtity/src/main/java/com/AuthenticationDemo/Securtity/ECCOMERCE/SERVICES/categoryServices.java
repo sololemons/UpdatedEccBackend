@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @Service
 public class categoryServices {
-  private categoryRepository categoryRepository;
+  private final categoryRepository categoryRepository;
 
     @Autowired
     public categoryServices(categoryRepository categoryRepository) {
@@ -43,16 +43,21 @@ public class categoryServices {
         }
     }
 
-    public ResponseEntity<Category> updateCategory(Integer categoryId, Category categoryDetails) {
-
+    public void updateCategory(Integer categoryId, Category categoryDetails) {
         Category updateCategory = categoryRepository.findById(categoryId).orElseThrow(() -> new ResourceNotFoundException("Person does not exist with id :" + categoryId));
         updateCategory.setName(categoryDetails.getName());
         updateCategory.setDescription(categoryDetails.getDescription());
         updateCategory.setImage_Url(categoryDetails.getImage_Url());
         categoryRepository.save(updateCategory);
-        return ResponseEntity.ok(updateCategory);
+        ResponseEntity.ok(updateCategory);
+    }
+    public List<Category> searchCategories(String query) {
+        return categoryRepository.findByNameContaining(query);
     }
 
+    public Optional<Category> getCategorybyId(Integer categoryId) {
+         return categoryRepository.findById(categoryId);
+    }
 }
 
 

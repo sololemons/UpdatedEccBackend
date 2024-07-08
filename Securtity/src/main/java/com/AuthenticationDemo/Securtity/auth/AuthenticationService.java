@@ -3,7 +3,7 @@ package com.AuthenticationDemo.Securtity.auth;
 import com.AuthenticationDemo.Securtity.Config.JwtService;
 import com.AuthenticationDemo.Securtity.ECCOMERCE.Entity.Role;
 import com.AuthenticationDemo.Securtity.ECCOMERCE.REPOSITORY.Userrepository;
-import com.AuthenticationDemo.Securtity.ECCOMERCE.Entity.Users;
+import com.AuthenticationDemo.Securtity.ECCOMERCE.Entity.User;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.security.authentication.AuthenticationManager;
@@ -38,7 +38,7 @@ var user  = repository.findByEmail(request.getEmail())
 
     }
     public AuthenticationResponse register(RegisterRequest request){
-        var user = Users.builder()
+        var user = User.builder()
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())

@@ -1,6 +1,7 @@
 package com.AuthenticationDemo.Securtity.ECCOMERCE.CONTROLLLER;
 
 import com.AuthenticationDemo.Securtity.ECCOMERCE.DTO.PaymentRequest;
+import com.AuthenticationDemo.Securtity.ECCOMERCE.DTO.paymentResponse;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import okhttp3.OkHttpClient;
@@ -16,6 +17,7 @@ import java.util.Date;
 
 @RestController
 @RequestMapping("/api/v4/mpesa")
+
 public class mpesaIntegration {
 
     private static final String CONSUMER_KEY = "z6JdSnLAKDmVirHAHnne7eiWALZNhXplr20Q1uNd2ULMa36q";
@@ -77,6 +79,41 @@ public class mpesaIntegration {
         ResponseEntity<String> stkPushResponseEntity = restTemplate.exchange(MPESA_STK_PUSH_URL, HttpMethod.POST, stkPushRequestEntity, String.class);
         return new ResponseEntity<>(stkPushResponseEntity.getBody(), HttpStatus.OK);
     }
+    @PostMapping("/callback")
+    public ResponseEntity<String> mpesaCallback(@RequestBody paymentResponse callbackResponse) {
+        try {
+            // Extract necessary information from callbackResponse
+            paymentResponse.StkCallback stkCallback = callbackResponse.getBody().getStkCallback();
+            String merchantRequestID = stkCallback.getMerchantRequestID();
+            int resultCode = stkCallback.getResultCode();
+            String resultDesc = stkCallback.getResultDesc();
+
+            // Example: Log the extracted information
+            System.out.println("Received M-Pesa callback:");
+            System.out.println("MerchantRequestID: " + merchantRequestID);
+            System.out.println("ResultCode: " + resultCode);
+            System.out.println("ResultDesc: " + resultDesc);
+
+            // Example: Handle payment success or failure based on resultCode
+            if (resultCode == 0) {
+                // Payment successful
+                System.out.println("Payment successful.");
+                // Example: Call a service method to update order status
+                // orderService.updateOrderStatus(merchantRequestID, "PAID");
+            } else {
+                // Payment not successful
+                System.out.println("Payment not successful: " + resultDesc);
+            }
+
+            // Return a response indicating successful processing (optional)
+            return ResponseEntity.ok("Callback processed successfully.");
+        } catch (Exception e) {
+            // Handle any exceptions that might occur during processing
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Error processing callback: " + e.getMessage());
+        }
+    }
+
+
 
     private String generateTimestamp() {
         Date date = new Date();

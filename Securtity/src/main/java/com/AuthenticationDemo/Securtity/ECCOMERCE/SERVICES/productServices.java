@@ -58,7 +58,12 @@ public class productServices {
     public List<Product> getProductsByCategoryId(Integer categoryId) {
         return productRepository.findByCategory_CategoryId(categoryId);
     }
+
+    public List<Product> searchProducts(String query) {
+        return productRepository.findByProductNameContaining(query);
+    }
 }
+
 
 
 
